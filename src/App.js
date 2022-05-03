@@ -3,7 +3,7 @@ import NewsFeed from './components/NewsFeed';
 
 function App() {
   return (
-    <div classname="App">
+    <div className="App">
       <div className="container border p-2">
         <header className="text-center p-2 border">
           React News
