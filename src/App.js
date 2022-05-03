@@ -1,4 +1,5 @@
 import './App.css';
+import NewsFeed from './components/NewsFeed';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
           React News
         </header>
         <div className="main border p-2">
+        <NewsFeed/>
         </div>
       </div>
     </div>
