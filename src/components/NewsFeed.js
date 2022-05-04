@@ -51,9 +51,16 @@ export default function NewsFeed(props) {
   } else {
     return (
       <div className="newsFeed">
-        {console.log(JSON.stringify(items, null, 2))}
-        Retrieved {items.totalResults} news articles, top{" "}
-        {items.articles.length} displayed.
+        {props.query ? (
+          <div>
+            Displaying results for <span className="fw-bold">{props.query}</span>
+            <br />
+            {items.totalResults} results found.
+          </div>
+        ) : (
+          `Displaying top headlines.`
+        )}
+        
         {items.articles.map((item) => (
           <NewsItem key={uuid()} data={item} />
         ))}
