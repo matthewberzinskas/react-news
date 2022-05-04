@@ -1,7 +1,7 @@
 export default function NewsItem (props) {
 
   let data = props.data;
-  console.log("props:", props)
+  console.log("newsItem props", props)
 
   return (
     <div className="card border p-2">

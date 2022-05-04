@@ -4,15 +4,26 @@ import uuid from "react-uuid";
 import NewsItem from "./NewsItem";
 import { API, URL, QUERY, COUNTRY } from "../config/Config";
 
-export default function NewsFeed() {
-  let query = URL + QUERY + COUNTRY + API;
-  console.log(query);
+// Default, top 20 headlines for USA
+const DEFAULT = URL + QUERY + COUNTRY + API;
+
+export default function NewsFeed(props) {
+  console.log("newsFeed props", props);
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    let query = "";
+    if (props.query === "") {
+      //Default top headlines
+      query = URL + QUERY + COUNTRY + API;
+    } else {
+      query = `https://newsapi.org/v2/everything?q=${props.query + API}`;
+    }
+
+    console.log("fetching from:", query);
     fetch(query)
       .then((res) => res.json())
       .then(
@@ -26,17 +37,23 @@ export default function NewsFeed() {
           setError(error);
         }
       );
-  }, []);
+  }, [props.query]);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div>
+        {console.log("Error in fetch\n", error.message)}
+        Error loading news.
+      </div>
+    );
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
     return (
       <div className="newsFeed">
         {console.log(JSON.stringify(items, null, 2))}
-        Retrieved {items.totalResults} news articles, top {items.articles.length} displayed.
+        Retrieved {items.totalResults} news articles, top{" "}
+        {items.articles.length} displayed.
         {items.articles.map((item) => (
           <NewsItem key={uuid()} data={item} />
         ))}

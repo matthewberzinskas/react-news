@@ -1,58 +1,80 @@
-export default function Navbar () {
+import { useState } from "react";
+
+export default function Navbar(props) {
+  console.log("navBar props", props);
+
+  const [value, setValue] = useState("");
+
+  // When the form is submitted, pass the search term
+  // to the callback function, reset the value.
+  const onSubmit = (e) => {
+    props.callBack(value);
+    setValue("")
+  };
 
   return (
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-      
+    <nav className="navbar navbar-expand-md navbar-light bg-light">
+      <div className="container-fluid">
+        <a href="/" className="navbar-brand">
+          React News
+        </a>
 
-      <a href="#" class="navbar-brand">Brand</a>
-      
-     <button
-        type="button"
-        class="navbar-toggler"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button
+          type="button"
+          className="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-
-      <div
-        class="collapse navbar-collapse justify-content-between"
-        id="navbarCollapse"
-      >
-        <div class="navbar-nav">
-          <a href="#" class="nav-item nav-link active">Home</a>
-          <a href="#" class="nav-item nav-link">Profile</a>
-          
-
-          <div class="nav-item dropdown">
-            <a
-              href="#"
-              class="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-              >Messages</a
-            >
-            <div class="dropdown-menu">
-              <a href="#" class="dropdown-item">Inbox</a>
-              <a href="#" class="dropdown-item">Sent</a>
-              <a href="#" class="dropdown-item">Drafts</a>
+        <div
+          className="collapse navbar-collapse justify-content-between"
+          id="navbarCollapse"
+        >
+          {/* <div class="navbar-nav">
+            <div class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+              >
+                Messages
+              </a>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">
+                  Inbox
+                </a>
+                <a href="#" class="dropdown-item">
+                  Sent
+                </a>
+                <a href="#" class="dropdown-item">
+                  Drafts
+                </a>
+              </div>
             </div>
-          </div>
+          </div> */}
+
+          <form className="d-flex ms-auto" onSubmit={onSubmit}>
+            <div className="input-group p-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                onChange={e => setValue(e.target.value)}
+                value={value}
+              />
+
+              <button
+                className="btn btn-secondary"
+                type="submit"
+              >
+                Go
+              </button>
+            </div>
+          </form>
         </div>
-
-
-        <form class="d-flex ms-auto">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" />
-            <button type="button" class="btn btn-secondary">
-              <i class="bi-search"></i>
-            </button>
-          </div>
-        </form>
-
       </div>
-    </div>
-  </nav>
-  )
+    </nav>
+  );
 }
