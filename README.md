@@ -1,6 +1,8 @@
 # News API built with React
 Simple news application built in React/Bootstrap. Loads the current top headlines in the USA, and allows for search. Future implementations will have more features, but this simple concept demonstrates responsive layout, fetching from API, displaying, and modifying the query with search parameters.
 
+
+![Alt text](https://github.com/matthewberzinskas/react-news/blob/master/react-news.PNG)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
