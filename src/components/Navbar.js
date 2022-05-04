@@ -8,6 +8,7 @@ export default function Navbar(props) {
   // When the form is submitted, pass the search term
   // to the callback function, reset the value.
   const onSubmit = (e) => {
+    e.preventDefault()
     props.callBack(value);
     setValue("")
   };
